@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>inoRound Task Pane Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ino-welcome ms-Fabric">
+    <header class="ino-welcome__header ms-bgColor-neutralLighter">
+        <img width="30" height="30" src="../../assets/logo-filled.png" alt="INOPIAE" title="INOPIAE" />
+        <h2 class="ms-font-su">inoRound</h2>
+    </header>
+    <section id="sideload-msg" class="ino-welcome__main">
+        <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
+    </section>
+    <main id="app-body" class="ino-welcome__main" style="display: none;">
+        <div role="button" id="iround" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
+            <span class="ino-Button-label">Round</span>
+        </div>
+        <div role="button" id="iunround" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
+            <span class="ino-Button-label">Remove Round</span>
+        </div>
+    </main>
+</body>
+
+</html>
