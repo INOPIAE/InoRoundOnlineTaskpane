@@ -22,7 +22,7 @@
     align-items: center;
  }
 
- .ms-welcome__main {
+ .ino-welcome__main {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
@@ -36,36 +36,36 @@
     padding: 10px 20px;
  }
  
- .ms-welcome__main > h2 {
+ .ino-welcome__main > h2 {
      width: 100%;
      text-align: center;
  }
  
- .ms-welcome__features {
+ .ino-welcome__features {
      list-style-type: none;
      margin-top: 20px;
  }
  
- .ms-welcome__features.ms-List .ms-ListItem {
+ .ino-welcome__features.ino-List .ino-ListItem {
      padding-bottom: 20px;
      display: -webkit-flex;
      display: flex;
  }
  
- .ms-welcome__features.ms-List .ms-ListItem > .ms-Icon {
+ .ino-welcome__features.ino-List .ino-ListItem > .ino-Icon {
      margin-right: 10px;
  }
  
- .ms-welcome__action.ms-Button--hero {
+ .ino-welcome__action.ino-Button--hero {
      margin-top: 30px;
  }
  
-.ms-Button.ms-Button--hero .ms-Button-label {
+.ino-Button.ino-Button--hero .ino-Button-label {
   color: #0078d7;
 }
 
-.ms-Button.ms-Button--hero:hover .ms-Button-label,
-.ms-Button.ms-Button--hero:focus .ms-Button-label{
+.ino-Button.ino-Button--hero:hover .ino-Button-label,
+.ino-Button.ino-Button--hero:focus .ino-Button-label{
   color: #005a9e;
   cursor: pointer;
 }
