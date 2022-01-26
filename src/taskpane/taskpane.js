@@ -6,10 +6,24 @@ Office.onReady((info) => {
     document.getElementById("app-body").style.display = "flex";
     document.getElementById("iunround").onclick = iunround;
     document.getElementById("iround").onclick = iround;
+    document.getElementById("iroundup").onclick = iroundup;
+    document.getElementById("irounddown").onclick = irounddown;
   }
 });
 
 export async function iround() {
+  irounding("");
+}
+
+export async function iroundup() {
+  irounding("up");
+}
+
+export async function irounddown() {
+  irounding("down");
+}
+
+export async function irounding(roundType) {
   try {
     await Excel.run(async (context) => {
       let myRng = context.workbook.getSelectedRange();
@@ -33,6 +47,18 @@ export async function iround() {
 
       let myOuterArray = [];
 
+      let rounding = "=ROUND(";
+      switch (roundType) {
+        case "up":
+          rounding = "=ROUNDUP(";
+          break;
+        case "down":
+          rounding = "=ROUNDDOWN(";
+          break;
+        default:
+          rounding = "=ROUND(";
+      }
+
       // loop through each row
       myFormulas.forEach(function (row) {
         // define the inner array
@@ -40,17 +66,16 @@ export async function iround() {
 
         // then loop through each column
         row.forEach(function (col) {
-          //console.log(col);
           let colString = col.toString();
           let test = colString.substring(0, 1);
-
           if (test == "=") {
-            let newFormula = colString.replace("=", "=ROUND(") + ", " + digit + ")";
-            console.log(newFormula);
+            let newFormula = colString.replace("=", rounding) + ", " + digit + ")";
             if (colString.length >= 6) {
               let test = colString.substring(0, 6);
               if (test == "=ROUND") {
-                myInnerArray.push(col);
+                let newFormula1 = RemoveRound(colString);
+                newFormula = newFormula1.replace("=", rounding) + ", " + digit + ")";
+                myInnerArray.push(newFormula);
               } else {
                 myInnerArray.push(newFormula);
               }
@@ -59,7 +84,7 @@ export async function iround() {
             }
 /*          } else if (checkBoxNum.checked == true) {
             if (isNaN(col) == true) {
-              let newFormula = "=ROUND(" + colString + ", 2)";
+              let newFormula = rounding + colString + ", " + digit + ")";
               console.log(newFormula);
               //myInnerArray.push(newFormula);
             }*/
@@ -102,10 +127,11 @@ export async function iunround() {
           let test = colString.substring(0, 6);
 
           if (test == "=ROUND") {
-            let newFormula = colString.replace("=ROUNDDOWN(", "=");
+/*            let newFormula = colString.replace("=ROUNDDOWN(", "=");
             newFormula = newFormula.replace("=ROUNDUP(", "=");
             newFormula = newFormula.replace("=ROUND(", "=");
-            newFormula = newFormula.substring(0, newFormula.lastIndexOf(","));
+            newFormula = newFormula.substring(0, newFormula.lastIndexOf(","));*/
+            let newFormula = RemoveRound(colString);
             myInnerArray.push(newFormula);
           } else {
             myInnerArray.push(col);
@@ -122,4 +148,12 @@ export async function iunround() {
   } catch (error) {
     console.error(error);
   }
+}
+
+function RemoveRound(OldFormula) {
+  var newFormula = OldFormula.replace("=ROUNDDOWN(", "=");
+  newFormula = newFormula.replace("=ROUNDUP(", "=");
+  newFormula = newFormula.replace("=ROUND(", "=");
+  newFormula = newFormula.substring(0, newFormula.lastIndexOf(","));
+  return newFormula;
 }
