@@ -26,6 +26,20 @@
         <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
     </section>
     <main id="app-body" class="ino-welcome__main" style="display: none;">
+        <!--<div role="button" id="iroundnum" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">-->
+        <!--    <input type="checkbox" name="Present Address" id="inochknum"><span class="ino-Button-label">Round figures</span>-->
+        <!--</div>-->
+        <label for="inoDigits">Number of digits</label>
+        <input type="text" name="inoDigits" id="inoDigits" list="inoSuggestion" value="0.01">
+        <datalist id="inoSuggestion">
+            <option>1000</option>
+            <option>100</option>
+            <option>10</option>
+            <option>1</option>
+            <option>0.1</option>
+            <option>0.01</option>
+            <option>0.001</option>
+        </datalist>
         <div role="button" id="iround" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
             <img width="20" height="20" src="../../assets/round.png" alt="Round" title="Round" />
             <span class="ino-Button-label">Round</span>
