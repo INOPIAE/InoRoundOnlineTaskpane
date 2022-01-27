@@ -28,9 +28,7 @@ export async function irounding(roundType) {
     await Excel.run(async (context) => {
       let myRng = context.workbook.getSelectedRange();
       myRng.load(["values", "text", "formulas", "formulasR1C1"]);
-/*      var checkBoxNum = document.getElementById("inochknum");
-      console.log(checkBoxNum);
-      console.log(checkBoxNum.checked);*/
+      var checkBoxNum = document.getElementById("inochknum");
 
       // define digits
       var digits = document.getElementById("inoDigits");
@@ -44,6 +42,8 @@ export async function irounding(roundType) {
 
       await context.sync();
       let myFormulas = myRng.formulasR1C1;
+      let myValues = myRng.values;
+      let myText = myRng.text;
 
       let myOuterArray = [];
 
@@ -59,6 +59,8 @@ export async function irounding(roundType) {
           rounding = "=ROUND(";
       }
 
+      var cRow = 0;
+      var cCol = 0;
       // loop through each row
       myFormulas.forEach(function (row) {
         // define the inner array
@@ -82,19 +84,24 @@ export async function irounding(roundType) {
             } else {
               myInnerArray.push(newFormula);
             }
-/*          } else if (checkBoxNum.checked == true) {
-            if (isNaN(col) == true) {
+          } else if (checkBoxNum.checked == true) {
+            if (isNumeric(myValues[cRow][cCol]) == true && isDate(myText[cRow][cCol]) == false) {
               let newFormula = rounding + colString + ", " + digit + ")";
               console.log(newFormula);
-              //myInnerArray.push(newFormula);
-            }*/
+              myInnerArray.push(newFormula);
+            } else {
+              myInnerArray.push(col);
+            }
           } else {
             myInnerArray.push(col);
           }
+          ++cCol;
         });
 
         // append the inner array to the outer array
         myOuterArray.push(myInnerArray);
+        ++cRow;
+        cCol = 0;
       });
 
       //replace orginal value with neu values
@@ -127,10 +134,6 @@ export async function iunround() {
           let test = colString.substring(0, 6);
 
           if (test == "=ROUND") {
-/*            let newFormula = colString.replace("=ROUNDDOWN(", "=");
-            newFormula = newFormula.replace("=ROUNDUP(", "=");
-            newFormula = newFormula.replace("=ROUND(", "=");
-            newFormula = newFormula.substring(0, newFormula.lastIndexOf(","));*/
             let newFormula = RemoveRound(colString);
             myInnerArray.push(newFormula);
           } else {
@@ -156,4 +159,24 @@ function RemoveRound(OldFormula) {
   newFormula = newFormula.replace("=ROUND(", "=");
   newFormula = newFormula.substring(0, newFormula.lastIndexOf(","));
   return newFormula;
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function isDate(value) {
+  switch (typeof value) {
+    case "number":
+      return true;
+    case "string":
+      return !isNaN(Date.parse(value));
+    case "object":
+      if (value instanceof Date) {
+        return !isNaN(value.getTime());
+      }
+      return false;
+    default:
+      return false;
+  }
 }
