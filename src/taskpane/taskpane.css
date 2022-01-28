@@ -33,7 +33,7 @@
     align-items: center;
     -webkit-flex: 1 0 0;
     flex: 1 0 0;
-    padding: 10px 20px;
+    padding: 5px 5px;
  }
  
  .ino-welcome__main > h2 {
@@ -43,21 +43,21 @@
  
  .ino-welcome__features {
      list-style-type: none;
-     margin-top: 20px;
+     margin-top: 5px;
  }
  
  .ino-welcome__features.ino-List .ino-ListItem {
-     padding-bottom: 20px;
+     padding-bottom: 5px;
      display: -webkit-flex;
      display: flex;
  }
  
  .ino-welcome__features.ino-List .ino-ListItem > .ino-Icon {
-     margin-right: 10px;
+     margin-right: 5px;
  }
  
  .ino-welcome__action.ino-Button--hero {
-     margin-top: 30px;
+     margin-top: 5px;
  }
  
 .ino-Button.ino-Button--hero .ino-Button-label {

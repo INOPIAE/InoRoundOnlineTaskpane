@@ -29,9 +29,11 @@
         <div role="button" id="iroundnum" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
             <input type="checkbox" name="Present Address" id="inochknum"><span class="ino-Button-label">Round figures</span>
         </div>
-        <div role="button" id="iroundformat" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
-            <label for="inoDigits">Select number format</label>
-            <input type="text" name="inoDigits" id="inoDigits" list="inoSuggestion" value="0.01">
+        <div role="dropdown" id="iroundformatlbl" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
+            <label for="inoDigits" class="ino-Button-label">Select number format</label>
+        </div>
+        <div role="dropdown" id="iroundformat" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
+           <input type="text" name="inoDigits" id="inoDigits" list="inoSuggestion" class="ino-Button-label" value="0.01">
                 <datalist id="inoSuggestion">
                     <option>1000</option>
                     <option>100</option>
