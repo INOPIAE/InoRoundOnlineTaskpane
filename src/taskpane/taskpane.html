@@ -15,22 +15,44 @@
 
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function changeLanguageUsingLangResOnExternalJson(clickedLangChoiceId) {  // 1
+            $(function() {
+                var langItems = ['#header', "#sideload-msg", '#iroundnum', '#iroundformatlbl', '#iround', '#iroundup', '#irounddown', '#iunround'];
+                $.getJSON("../../lang/" + clickedLangChoiceId + ".json", function(jsonData) {
+                    langItems.forEach(function(item, index, array) {
+                        $(item).children(".transl").each(function() {
+                        let currentlyIteratedGreetKey = $(this).attr("key");
+                        let localizedValForGreetKey = jsonData[currentlyIteratedGreetKey];
+                        $(this).text(localizedValForGreetKey);
+                    });
+                    });
+                });
+            });
+        }
+    </script>
 </head>
 
 <body class="ms-font-m ino-welcome ms-Fabric">
-    <header class="ino-welcome__header ms-bgColor-neutralLighter">
+    <header id="header" class="ino-welcome__header ms-bgColor-neutralLighter">
         <img width="30" height="30" src="../../assets/kugel.gif" alt="INOPIAE" title="INOPIAE" />
-        <h2 class="ms-font-su">Rounding</h2>
+        <h2 class="ms-font-sulb transl" key="header">Rounding</h2>
     </header>
     <section id="sideload-msg" class="ino-welcome__main">
-        <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
+        <h2 class="ms-font-xltransl" key="sideload">Please sideload your add-in to see app body.</h2>
     </section>
     <main id="app-body" class="ino-welcome__main" style="display: none;">
+        <div role="button" id="ibuttons" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl"></div>
+            <button id="en" class="lang-choice" onclick="changeLanguageUsingLangResOnExternalJson(this.id)">English</button>
+            <button id="de" class="lang-choice" onclick="changeLanguageUsingLangResOnExternalJson(this.id)">Deutsch</button>
+        </div>
         <div role="button" id="iroundnum" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
-            <input type="checkbox" name="Present Address" id="inochknum"><span class="ino-Button-label">Round figures</span>
+            <input type="checkbox" name="Present Address" id="inochknum"><span class="ino-Button-label transl" key="roundnum">Round figures</span>
         </div>
         <div role="dropdown" id="iroundformatlbl" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
-            <label for="inoDigits" class="ino-Button-label">Select number format</label>
+            <label for="inoDigits" class="ino-Button-label transl" key="formatlbl">Select number format</label>
         </div>
         <div role="dropdown" id="iroundformat" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
            <input type="text" name="inoDigits" id="inoDigits" list="inoSuggestion" class="ino-Button-label" value="0.01">
@@ -46,19 +68,19 @@
         </div>
         <div role="button" id="iround" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
             <img width="20" height="20" src="../../assets/round.png" alt="Round" title="Round" />
-            <span class="ino-Button-label">Round</span>
+            <span class="ino-Button-label transl" key="round">Round</span>
         </div>
         <div role="button" id="iroundup" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
             <img width="20" height="20" src="../../assets/roundup.png" alt="RoundUp" title="RoundUp" />
-            <span class="ino-Button-label">Round up</span>
+            <span class="ino-Button-label transl" key="roundup"">Round up</span>
         </div>
         <div role="button" id="irounddown" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
             <img width="20" height="20" src="../../assets/rounddown.png" alt="RoundDown" title="RoundDown" />
-            <span class="ino-Button-label">Round down</span>
+            <span class="ino-Button-label transl" key="rounddown">Round down</span>
         </div>
         <div role="button" id="iunround" class="ino-welcome__action ino-Button ino-Button--hero ms-font-xl">
             <img width="20" height="20" src="../../assets/removeround.png" alt="Remove Round" title="Remove Round" />
-            <span class="ino-Button-label">Remove Round</span>
+            <span class="ino-Button-label transl" key="roundremove">Remove Round</span>
         </div>
     </main>
 </body>

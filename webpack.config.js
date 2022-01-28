@@ -68,6 +68,10 @@ module.exports = async (env, options) => {
             to: "assets/[name][ext][query]",
           },
           {
+            from: "lang/*",
+            to: "lang/[name][ext][query]",
+          },
+          {
             from: "manifest*.xml",
             to: "[name]." + buildType + "[ext]",
             transform(content) {

@@ -1,0 +1,10 @@
+{
+    "header": "Runden",
+    "sideload": "Lade das Add-In um die App zu sehen.",
+    "roundnum": "Runde Zahlen",
+    "formatlbl": "Wähle Zahlenformat (engl. Notation)",
+    "round": "Runden (kaufm.)",
+    "roundup": "Aufrunden",
+    "rounddown": "Abrunden",
+    "roundremove": "Rundung entfernen"
+  }
