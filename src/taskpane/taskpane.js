@@ -9,6 +9,8 @@ Office.onReady((info) => {
     document.getElementById("iroundup").onclick = iroundup;
     document.getElementById("irounddown").onclick = irounddown;
   }
+  var myLanguage = Office.context.displayLanguage;
+  translation(myLanguage.substring(0, 2));
 });
 
 export async function iround() {
@@ -179,4 +181,28 @@ function isDate(value) {
     default:
       return false;
   }
+}
+
+function translation(language) {
+  $(function() {
+    var langItems = [
+      "#header",
+      "#sideload-msg",
+      "#iroundnum",
+      "#iroundformatlbl",
+      "#iround",
+      "#iroundup",
+      "#irounddown",
+      "#iunround",
+    ];
+    $.getJSON("../../lang/" + language + ".json", function(jsonData) {
+      langItems.forEach(function(item) {
+        $(item).children(".transl").each(function() {
+            let currentlyIteratedGreetKey = $(this).attr("key");
+            let localizedValForGreetKey = jsonData[currentlyIteratedGreetKey];
+            $(this).text(localizedValForGreetKey);
+          });
+      });
+    });
+  });
 }
